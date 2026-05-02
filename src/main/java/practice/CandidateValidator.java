@@ -11,13 +11,16 @@ import model.Candidate;
  */
 
 public class CandidateValidator implements Predicate<Candidate> {
+    public static final int MIN_AGE = 35;
+    public static final String NATIONALITY = "Ukrainian";
+    public static final int MIN_PERIOD = 10;
 
     @Override
     public boolean test(Candidate candidate) {
         String[] period = candidate.getPeriodsInUkr().split("-");
         int periodInt = Integer.parseInt(period[1]) - Integer.parseInt(period[0]);
-        return candidate.getAge() >= 35
-                && candidate.getNationality().equals("Ukrainian")
-                && periodInt >= 10 && candidate.isAllowedToVote();
+        return candidate.getAge() >= MIN_AGE
+                && candidate.getNationality().equals(NATIONALITY)
+                && periodInt >= MIN_PERIOD && candidate.isAllowedToVote();
     }
 }
